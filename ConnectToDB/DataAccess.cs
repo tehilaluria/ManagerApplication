@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 
 namespace ConnectToDB
 {
@@ -10,7 +11,7 @@ namespace ConnectToDB
         public void InsertDate(string IqueryString, string connectionString)
         {
             string BookName, Auther, Image;
-            int CategoryId, NumOfPages;
+            int CategoryId, NumOfPages, Price;
             Console.WriteLine("insert BookName: ");
             BookName = Console.ReadLine();
             Console.WriteLine("insert Auther: ");
@@ -21,6 +22,8 @@ namespace ConnectToDB
             NumOfPages = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("insert Image: ");
             Image = Console.ReadLine();
+            Console.WriteLine("insert Price: ");
+            Price = Convert.ToInt32(Console.ReadLine());
 
 
             //string s = "insert into Products_tbl (ProductName,Description,CategoryId) values (@ProductName,@Description,@CategoryId)";
@@ -33,6 +36,7 @@ namespace ConnectToDB
                 command.Parameters.Add("@CategoryId", SqlDbType.Int).Value = CategoryId;
                 command.Parameters.Add("@NumOfPages", SqlDbType.Int).Value = NumOfPages;
                 command.Parameters.Add("@Image", SqlDbType.VarChar, 20).Value = Image;
+                command.Parameters.Add("@Price", SqlDbType.Int).Value = Price;
                 command.Connection.Open();
                 int x = command.ExecuteNonQuery();
                 Console.WriteLine(x);
